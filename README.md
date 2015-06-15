@@ -6,10 +6,6 @@ LAMP image (PHP+MySQL)
 Usage
 -----
 
-You need the base image, execute the following command
-
-	docker pull ubuntu:trusty
-
 To create the image, execute the following command:
 
 	docker build -t pl4g4/ubuntu-lamp .
