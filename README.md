@@ -6,6 +6,10 @@ LAMP image (PHP+MySQL)
 Usage
 -----
 
+You need the base image, execute the following command
+
+	docker pull ubuntu:trusty
+
 To create the image, execute the following command:
 
 	docker build -t pl4g4/ubuntu-lamp .
@@ -15,12 +19,12 @@ Running your LAMP docker image
 
 Start your image binding the external ports 80 and 3306 in all interfaces to your container:
 
-	docker run -d -p 80:80 -p 3306:3306 pl4g4/ubuntu-lamp
+	docker run -d -p 80:80 -p 3306:3306 -p 22:22 pl4g4/ubuntu-lamp
 
 Working directory
 -----------------
 
-docker run -d -p 80:80 -p 3306:3306 -v /yourdirectory:/var/www/html/ pl4g4/ubuntu-lamp
+docker run -d -p 80:80 -p 3306:3306 -p 22:22 -v /yourdirectory:/var/www/html/ pl4g4/ubuntu-lamp
 
 Connecting to the bundled MySQL server from outside the container
 -----------------------------------------------------------------
@@ -58,7 +62,7 @@ Setting a specific password for the MySQL server admin account
 If you want to use a preset password instead of a random generated one, you can
 set the environment variable `MYSQL_PASS` to your specific password when running the container:
 
-	docker run -d -p 80:80 -p 3306:3306 -e MYSQL_PASS="mypass" tutum/lamp
+	docker run -d -p 80:80 -p 3306:3306 -p 22:22 -e MYSQL_PASS="mypass" pl4g4/lamp
 
 You can now test your new admin password:
 
