@@ -7,6 +7,15 @@ RUN apt-get update && \
   apt-get -y install supervisor git apache2 libapache2-mod-php5 mysql-server php5-mysql pwgen php-apc php5-mcrypt && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+#Adding SSH access
+RUN apt-get install -y openssh-server
+ADD configure-ssh.sh /configure-ssh.sh
+RUN bin/bash /configure-ssh.sh && rm /configure-ssh.sh
+ADD supervisord-sshd.conf /etc/supervisor/conf.d/supervisord-ssh.conf
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
 # Add image configuration and scripts
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
@@ -34,5 +43,5 @@ ENV PHP_POST_MAX_SIZE 10M
 # Add volumes for MySQL 
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
 
-EXPOSE 80 3306
+EXPOSE 80 3306 22 443
 CMD ["/run.sh"]

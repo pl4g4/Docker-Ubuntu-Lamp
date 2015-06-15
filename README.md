@@ -64,3 +64,9 @@ You can now test your new admin password:
 
 	mysql -uadmin -p"mypass"
 
+SSH into container
+------------------
+
+	ssh root@127.0.0.1 -p 22
+
+password is: root
