@@ -13,9 +13,6 @@ ADD configure-ssh.sh /configure-ssh.sh
 RUN bin/bash /configure-ssh.sh && rm /configure-ssh.sh
 ADD supervisord-sshd.conf /etc/supervisor/conf.d/supervisord-ssh.conf
 
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
 # Add image configuration and scripts
 ADD start-apache2.sh /start-apache2.sh
 ADD start-mysqld.sh /start-mysqld.sh
